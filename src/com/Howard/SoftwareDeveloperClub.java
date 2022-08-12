@@ -12,6 +12,11 @@ import java.util.List;
 
 public class SoftwareDeveloperClub {
 	private List<ClubMember> members = new ArrayList<>();
+	
+	/*
+	 * populate internal ArrayList by reading from the file.
+	 *  
+	 */
 	public SoftwareDeveloperClub() {
 		File f = new File("./members.txt");	
 		try(InputStream reader = new FileInputStream(f);)
@@ -19,7 +24,6 @@ public class SoftwareDeveloperClub {
 			//drop header line
 			if(reader.available()>0)
 				this.readLine(reader);
-				//reader.nextLine();
 			while(reader.available()>0) 
 			{
 				String[] line = this.readLine(reader).split("\\*\\*");
@@ -30,6 +34,7 @@ public class SoftwareDeveloperClub {
 		}
 	}
 	
+	//display the contents of the internal ArrayList
 	public void displayMembers() 
 	{
 		for(ClubMember cm:members) 
@@ -39,6 +44,7 @@ public class SoftwareDeveloperClub {
 		System.out.println();
 	}
 	
+	//pass through methods 
 	public boolean removeMember(int index) 
 	{
 		return members.remove(index)!=null;
@@ -49,12 +55,16 @@ public class SoftwareDeveloperClub {
 		return members.add(cm);
 	}
 	
+	/*
+	 * Saves the content of the member list to the file specified by fname
+	 */
 	public void saveMemberList(String fname) 
 	{
 		File f = new File(fname);
 		try (OutputStream fw = new FileOutputStream(f))
 		{
 			if(f.canWrite()) {
+				fw.write("NAME**CITY**STATE**FAVORITE PROGRAMMING LANGUAGE".getBytes());
 				for(ClubMember cm:members) 
 				{
 					fw.write(cm.saveString().getBytes());
@@ -68,6 +78,11 @@ public class SoftwareDeveloperClub {
 		}
 	}
 	
+	/*
+	 * reads a line of characters up to the first newline character or the end of the file
+	 * returns a string of all the characters excluding the newline.
+	 * 
+	 */
 	public String readLine(InputStream fis) 
 	{
 		int b;
