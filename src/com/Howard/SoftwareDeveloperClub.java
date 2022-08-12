@@ -10,12 +10,14 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * specialized wrapper for an array list to store a list of members.
+ */
 public class SoftwareDeveloperClub {
 	private List<ClubMember> members = new ArrayList<>();
 	
 	/*
 	 * populate internal ArrayList by reading from the file.
-	 *  
 	 */
 	public SoftwareDeveloperClub() {
 		File f = new File("./members.txt");	
@@ -34,17 +36,21 @@ public class SoftwareDeveloperClub {
 		}
 	}
 	
-	//display the contents of the internal ArrayList
+	/*
+	 * display the contents of the internal ArrayList
+	 */
 	public void displayMembers() 
 	{
 		for(ClubMember cm:members) 
 		{
 			System.out.println(cm);
+			System.out.println();
 		}
-		System.out.println();
 	}
 	
-	//pass through methods 
+	/*
+	 * pass through methods remove and add
+	 */
 	public boolean removeMember(int index) 
 	{
 		return members.remove(index)!=null;
@@ -81,7 +87,6 @@ public class SoftwareDeveloperClub {
 	/*
 	 * reads a line of characters up to the first newline character or the end of the file
 	 * returns a string of all the characters excluding the newline.
-	 * 
 	 */
 	public String readLine(InputStream fis) 
 	{
